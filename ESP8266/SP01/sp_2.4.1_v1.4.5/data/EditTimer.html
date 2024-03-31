@@ -1,0 +1,23 @@
+<!DOCTYPE html><html>
+<head>
+<title>Smart Grid Lap Global Server</title>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no">
+<link rel="icon"href="data:,"><link rel="stylesheet"type="text/css"href="style.css">
+</head>
+<body>
+<div class="topnav"><h1>Smart Grid Lab BMS</h1></div>
+<b><a href="Home">Home</a>&emsp;<a href="Measure">Measure</a>&emsp;<a href="Timers">Timers</a>&emsp;<a href="Config">Config</a></b>
+<div class="topnav">
+<h2>IoT Smart Plug</h2><hr /><h3>Edit Timer %T_N_N%</h3>
+<h4>State:<label class="switch"><input type="checkbox" onchange="Toggle(this)" id="Output" %T_N%><span class="slider"></span></label></h4>
+<form action="SetTimer" method="POST">
+<h4>Start&emsp;<label>Hr:</label><input type="number" name="t_s_h" placeholder="%T_N_S_H%" maxlength=2 size=2 max=23 min=0 autofocus><label>Min:</label><input type="number" name="t_s_m" placeholder="%T_N_S_M%" maxlength=2 size=2 max=59 min=0 autofocus></h4>
+<h4>End  &emsp;<label>Hr:</label><input type="number" name="t_e_h" placeholder="%T_N_E_H%" maxlength=2 size=2 max=23 min=0 autofocus><label>Min:</label><input type="number" name="t_e_m" placeholder="%T_N_E_M%" maxlength=2 size=2 max=59 min=0 autofocus></h4>
+<button class="button" name="t" value="%T_N_N%">Save</button></form><br>
+<br><hr /><p>%C3%</p>
+</div>
+</body>
+<script>
+function Toggle(element){var xhr=new XMLHttpRequest();if(element.checked){xhr.open("GET","/timer_state?t=%T_N_N%&state=1",true);}else{xhr.open("GET","/timer_state?t=%T_N_N%&state=0",true);}xhr.send();}
+</script>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html><html>
+<head>
+<title>Smart Grid Lap Global Server</title>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no">
+<link rel="icon"href="data:,"><link rel="stylesheet"type="text/css"href="style.css">
+</head>
+<body>
+<div class="topnav"><h1>Smart Grid Lab BMS</h1></div>
+<b><a href="Home">Home</a>&emsp;<a href="Measure">Measure</a>&emsp;<a href="Timers">Timers</a>&emsp;<a href="Config">Config</a></b>
+<div class="topnav">
+<h2>IoT Smart Plug</h2><hr /><h3>Edit Time and Date</h3>
+<form action="SaveTime" method="POST">
+<h4><label>Hr:</label><input type="number" name="t_h" placeholder=%Time_H% maxlength=2 size=2 max=23 min=0 autofocus><label>Min:</label><input type="number" name="t_m" placeholder=%Time_M% maxlength=2 size=2 max=59 min=0 autofocus></h4>
+<h4><label>DD:</label><input type="number" name="d_d" placeholder=%Date_D% maxlength=2 size=2 max=31 min=1 autofocus><label>MM:</label><input type="number" name="d_m" placeholder=%Date_M% maxlength=2 size=2 max=12 min=1 autofocus><label>YY:</label><input type="number" name="d_y" placeholder=%Date_Y% maxlength=4 size=4 max=3000 min=2021 autofocus></h4>
+<button class="button">Save</button></form><br>
+<hr /><br><button class="button" onclick="Click()">Update Time and Date from Server</button><br>
+<br><hr /><p>%C1%</p>
+</div>
+</body>
+<script>
+const options={year:"2-digit",month:"2-digit",day:"2-digit",hour12:false,hour:"2-digit",minute:"2-digit",second:"2-digit"}
+function Click(){var d = new Date().toLocaleTimeString("en-US",options);var xhr=new XMLHttpRequest();xhr.open("GET","/Time?time=" + d,true);xhr.send();}
+</script>
+</html>

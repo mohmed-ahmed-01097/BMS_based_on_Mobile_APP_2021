@@ -1,0 +1,52 @@
+<!DOCTYPE html><html>
+<head>
+<title>Smart Grid Lap Global Server</title>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no">
+<link rel="icon"href="data:,"><link rel="stylesheet"type="text/css"href="style.css">
+</head>
+<body>
+<div class="topnav"><h1>Smart Grid Lab BMS</h1></div>
+<b><a href="Home">Home</a>&emsp;<a href="Timers">Timers</a>&emsp;<a href="Config">Config</a></b>
+<div class="topnav">
+<h2>IoT Smart Plug</h2>
+<hr /><h2>Device Time</h2><h3><strong><span id="Time">%Time_H%:%Time_M%</span></strong></h3><h4><strong><span id="Date">%Date_D%/%Date_M%/%Date_Y%</span></strong></h4>
+<hr /><h3>%H3%</h3>
+<div class="content"><div class="cards"><div class="card timer"><form action="EditTimer" method="POST"><h3>Timer0&emsp;State:%T_0%</h3><h4>Start:&emsp;%T_S_H_0%:%T_S_M_0%&emsp;-&emsp;End:&emsp;%T_E_H_0%:%T_E_M_0%</h4><button class="button" name="t" value="0">Edit</button></form></div></div></div>
+<div class="content"><div class="cards"><div class="card timer"><form action="EditTimer" method="POST"><h3>Timer1&emsp;State:%T_1%</h3><h4>Start:&emsp;%T_S_H_1%:%T_S_M_1%&emsp;-&emsp;End:&emsp;%T_E_H_1%:%T_E_M_1%</h4><button class="button" name="t" value="1">Edit</button></form></div></div></div>
+<div class="content"><div class="cards"><div class="card timer"><form action="EditTimer" method="POST"><h3>Timer2&emsp;State:%T_2%</h3><h4>Start:&emsp;%T_S_H_2%:%T_S_M_2%&emsp;-&emsp;End:&emsp;%T_E_H_2%:%T_E_M_2%</h4><button class="button" name="t" value="2">Edit</button></form></div></div></div>
+<div class="content"><div class="cards"><div class="card timer"><form action="EditTimer" method="POST"><h3>Timer3&emsp;State:%T_3%</h3><h4>Start:&emsp;%T_S_H_3%:%T_S_M_3%&emsp;-&emsp;End:&emsp;%T_E_H_3%:%T_E_M_3%</h4><button class="button" name="t" value="3">Edit</button></form></div></div></div>
+<div class="content"><div class="cards"><div class="card timer"><form action="EditTimer" method="POST"><h3>Timer4&emsp;State:%T_4%</h3><h4>Start:&emsp;%T_S_H_4%:%T_S_M_4%&emsp;-&emsp;End:&emsp;%T_E_H_4%:%T_E_M_4%</h4><button class="button" name="t" value="4">Edit</button></form></div></div></div>
+<br><hr /><p>%C3%</p>
+</div>
+</body>
+<script>
+window.onload = function() {getData();}
+function getData() {var xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Time").innerHTML=this.responseText;}};
+xhttp.open("GET","/get_time",true);xhttp.send();}
+setInterval(function (){getData();},10000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){if(this.responseText==1){document.getElementById("T_0").innerHTML="ON";}else{document.getElementById("T_0").innerHTML="OFF";}}};
+xhttp.open("GET","/timer?t=0",true);xhttp.send();},10000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){if(this.responseText==1){document.getElementById("T_1").innerHTML="ON";}else{document.getElementById("T_1").innerHTML="OFF";}}};
+xhttp.open("GET","/timer?t=1",true);xhttp.send();},10000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){if(this.responseText==1){document.getElementById("T_2").innerHTML="ON";}else{document.getElementById("T_2").innerHTML="OFF";}}};
+xhttp.open("GET","/timer?t=2",true);xhttp.send();},10000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){if(this.responseText==1){document.getElementById("T_3").innerHTML="ON";}else{document.getElementById("T_3").innerHTML="OFF";}}};
+xhttp.open("GET","/timer?t=3",true);xhttp.send();},10000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){if(this.responseText==1){document.getElementById("T_4").innerHTML="ON";}else{document.getElementById("T_4").innerHTML="OFF";}}};
+xhttp.open("GET","/timer?t=4",true);xhttp.send();},10000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Time").innerHTML=this.responseText;}};
+xhttp.open("GET","/get_time",true);xhttp.send();},10000);
+</script>
+</html>

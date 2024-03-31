@@ -1,0 +1,40 @@
+<!DOCTYPE html><html>
+<head>
+<title>Smart Grid Lap Global Server</title>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no">
+<link rel="icon"href="data:,"><link rel="stylesheet"type="text/css"href="style.css">
+</head>
+<body>
+<div class="topnav"><h1>Smart Grid Lab BMS</h1></div>
+<b><a href="Home">Home</a>&emsp;<a href="Measure">Measure</a>&emsp;<a href="Timers">Timers</a>&emsp;<a href="Config">Config</a></b>
+<div class="topnav"><h2>Smart Plug Web Server</h2><hr /><h3>%H4%</h3></div>
+<div class="topnav"><h4><strong>%IP%</strong></h4><strong><span id="APs"></span></strong></div>
+<div class="topnav"><form action="setting" method="POST">
+<h3><label>SSID &emsp;</label><input id='s' type="text" name="ssid" placeholder="Username" maxlength=32 size=32 autofocus required></h3>
+<h3><label>PASS&emsp;</label><input id='p' type="password" name="pass" placeholder="Password" maxlength=64 minlength=8 size=32 autofocus required></h3>
+<button class="button">Submit</button></form>
+</div>
+<div class="topnav"><hr /><h4><strong>%AP%</strong></h4>
+<form action="EditAP" method="POST"><button class="button">Access Point Setting</button></form>
+<br><hr /><p>%C4%</p>
+</div>
+</body>
+<script>
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){if(this.responseText==""){document.getElementById("APs").innerHTML="NO Access Point !!!";}else{document.getElementById("APs").innerHTML=this.responseText;}}};
+xhttp.open("GET","/get_APs",true);xhttp.send();},5000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("WiFi").innerHTML=this.responseText;}};
+xhttp.open("GET","/get_WiFi",true);xhttp.send();},1000);
+
+function c(l,e) {
+console.log(l);
+document.getElementById('s').value = l.innerText || l.textContent;
+p = l.nextElementSibling.classList.contains("l");
+document.getElementById('p').disabled = !p;
+if(p)document.getElementById('p').focus();
+return false;}
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html><html>
+<head>
+<title>Smart Grid Lap Global Server</title>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no">
+<link rel="icon"href="data:,"><link rel="stylesheet"type="text/css"href="style.css">
+</head>
+<body>
+<div class="topnav"><h1>Smart Grid Lab BMS</h1></div>
+<b><a href="Home">Home</a>&emsp;<a href="Measure">Measure</a>&emsp;<a href="Timers">Timers</a>&emsp;<a href="Config">Config</a></b>
+<div class="topnav">
+<h2>IoT Smart Plug</h2><hr /><h3>%H2%</h3>
+<div class="content">
+<div class="cards">
+<div class="card measure"><h3>Voltage</h3><h4><span id="Voltage">0</span><sup>V</sup></h4></div>
+<div class="card measure"><h3>Current</h3><h4><span id="Current">0</span><sup>A</sup></h4></div>
+<div class="card measure"><h3>Frequency</h3><h4><span id="Frequency">0</span><sup>Hz</sup></h4></div>
+<div class="card measure"><h3>Power Factor</h3><h4><span id="PowerFactor">0</span><sup>&#37</sup></h4></div>
+</div>
+<div class="cards">
+<div class="card power"><h3>Active Power</h3><h4><span id="ActivePower">0</span><sup>W</sup></h4></div>
+<div class="card power"><h3>Reactive Power</h3><h4><span id="ReactivePower">0</span><sup>VAR</sup></h4></div>
+</div>
+<div class="cards"> 
+<div class="card power"><h3>Energy</h3><h4><span id="Energy">0</span><sup>Whr</sup></h4></div>
+</div>
+</div>
+</div>
+<div class="topnav"><hr /><h2> Draw Charts </h2>
+<form action="Chart" method="GET"><button class="button">_Chart_</button></form>
+<form action="Monitor" method="GET"><button class="button">Monitor</button></form>
+<hr /><p>%C2%</p>
+</div>
+</body>
+<script>
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Voltage").innerHTML=this.responseText;}};
+xhttp.open("GET","/Voltage",true);xhttp.send();},1000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Current").innerHTML=this.responseText;}};
+xhttp.open("GET","/Current",true);xhttp.send();},1000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Frequency").innerHTML=this.responseText;}};
+xhttp.open("GET","/Frequency",true);xhttp.send();},1000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("PowerFactor").innerHTML= this.responseText;}};
+xhttp.open("GET","/PowerFactor",true);xhttp.send();},1000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("ActivePower").innerHTML=this.responseText;}};
+xhttp.open("GET","/ActivePower",true);xhttp.send();},1000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("ReactivePower").innerHTML=this.responseText;}};
+xhttp.open("GET","/ReactivePower",true);xhttp.send();},1000);
+setInterval(function(){
+var xhttp=new XMLHttpRequest();
+xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Energy").innerHTML=this.responseText;}};
+xhttp.open("GET","/Energy",true);xhttp.send();},1000);
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html><html>
+<head>
+<title>Smart Grid Lap Global Server</title>
+<meta name="viewport"content="width=device-width,initial-scale=1,user-scalable=no">
+<link rel="icon"href="data:,"><link rel="stylesheet"type="text/css"href="style.css">
+</head>
+<body>
+<div class="topnav"><h1>Smart Grid Lab BMS</h1></div>
+<b><a href="Home">Home</a>&emsp;<a href="Measure">Measure</a>&emsp;<a href="Timers">Timers</a>&emsp;<a href="Config">Config</a></b>
+<div class="topnav">
+<h2>IoT Smart Plug</h2><hr /><h3>%H1%</h3>
+<h4>Output Device - State <strong><span id="OutputState">%STATE%</span></strong></h4>
+<label class="switch"><input type="checkbox" onchange="Toggle(this)" id="Output"><span class="slider"></span></label>
+<br><hr />
+</div>
+<div class="topnav"><hr /><h2> Device Time </h2>
+<form action="EditTime" method="POST"><h3><strong><span id="Time">%Time_H%:%Time_M%</span></strong></h3><h4><strong><span id="Date">%Date_D%/%Date_M%/%Date_Y%</span></strong></h4><button class="button">Edit</button></form>
+<br><hr /><p>%C1%</p>
+</div>
+</body>
+<script>
+window.onload = function() {getData();}
+function Toggle(element){var xhr=new XMLHttpRequest();if(element.checked){xhr.open("GET","/toggle?state=1",true);}else{xhr.open("GET","/toggle?state=0",true);}xhr.send();}
+setInterval(function(){
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange=function(){
+if (this.readyState==4&&this.status==200){
+var inputChecked;var outputStateM;
+if( this.responseText==1){inputChecked=true;outputStateM="ON";}else{inputChecked=false;outputStateM="OFF";}document.getElementById("Output").checked=inputChecked;document.getElementById("OutputState").innerHTML=outputStateM;}};
+xhttp.open("GET","/state",true);xhttp.send();},1000);
+function getData() {var xhttp=new XMLHttpRequest();xhttp.onreadystatechange=function(){if(this.readyState==4&&this.status==200){document.getElementById("Time").innerHTML=this.responseText;}};
+xhttp.open("GET","/get_time",true);xhttp.send();}
+setInterval(function (){getData();},10000);
+</script>
+</html>
